@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Fire Max Tournament</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            background-image: url('background.jpg'); 
+            background-size: cover; 
+            background-position: center;
+            background-attachment: fixed;
+            color: #fff; 
+            text-align: center; 
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container { 
+            background: rgba(0, 0, 0, 0.8); 
+            border-radius: 15px; 
+            padding: 20px; 
+            width: 90%;
+            max-width: 800px;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+        }
+        h1 { 
+            font-size: 3rem; 
+            text-shadow: 3px 3px 5px #f39c12;
+        }
+        .rules, .register-btn, .prizes, .countdown, .leaderboard, .gallery, .contact {
+            margin-top: 20px;
+        }
+        .register-btn a {
+            background-color: #e74c3c;
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 30px;
+            border-radius: 5px;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(255, 0, 0, 0.6);
+        }
+        .language-toggle {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+        }
+        .language-toggle button {
+            background-color: #2980b9;
+            color: #fff;
+            border: none;
+            padding: 5px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="language-toggle">
+        <button onclick="toggleLanguage()">English / Marathi</button>
+    </div>
+    <div class="container">
+        <h1 id="title">🔥 Free Fire Max Tournament 🔥</h1>
+        <p id="description">Get ready to test your skills and conquer the battleground!</p>
+
+        <div class="countdown">
+            <h2 id="countdown-label">Countdown to Registration Deadline</h2>
+            <p id="countdown-timer"></p>
+        </div>
+
+        <div class="rules">
+            <h2 id="rules-label">Rules and Guidelines</h2>
+            <ul id="rules-list">
+                <li>No hacking, teaming, or abusive language.</li>
+                <li>Players must use their own accounts.</li>
+                <li>Entry fee must be paid before participation.</li>
+                <li>Prize distribution will be done within 24 hours of the tournament ending.</li>
+                <li>Follow the organizer's instructions during matches.</li>
+            </ul>
+        </div>
+
+        <div class="prizes">
+            <h2 id="prizes-label">Prize Pool</h2>
+            <p id="prizes-text"></p>
+        </div>
+
+        <div class="gallery">
+            <h2 id="gallery-label">Gallery</h2>
+            <img src="freefire1.jpg" alt="Free Fire Battle" width="100%">
+            <img src="freefire2.jpg" alt="Intense Gameplay" width="100%">
+        </div>
+
+        <div class="register-btn">
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSc3GDD0tDzs9wgI9YFtctRXT0xmIltIh9J3fqccO5STVzV4sA/viewform?usp=sharing" target="_blank" id="register-btn">Register Now</a>
+        </div>
+
+        <div class="contact">
+            <h2 id="contact-label">Contact Us</h2>
+            <p id="contact-details">For queries, contact: <br> 📞 +91 84468 72177<br> 📞 +91 75586 01858</p>
+        </div>
+    </div>
+
+    <script>
+        let currentLanguage = "en";
+
+        const translations = {
+            en: {
+                title: "🔥 Free Fire Max Tournament 🔥",
+                description: "Get ready to test your skills and conquer the battleground!",
+                countdown: "Countdown to Registration Deadline",
+                rules: "Rules and Guidelines",
+                rulesList: [
+                    "No hacking, teaming, or abusive language.",
+                    "Players must use their own accounts.",
+                    "Entry fee must be paid before participation.",
+                    "Prize distribution will be done within 24 hours of the tournament ending.",
+                    "Follow the organizer's instructions during matches."
+                ],
+                prizes: "Prize Pool",
+                prizesText: "1. With each kill you win 20 rupees<br>2. The one who survives till last wins 500 rupees<br>3. If a player has lost the match but has X kills, the player will be given the prize 20*X<br>4. If the winner has killed X players, the player is given the prize 500 + 20*X",
+                register: "Register Now"
+            },
+            mr: {
+                title: "🔥 फ्री फायर मॅक्स टूर्नामेंट 🔥",
+                description: "तुमच्या कौशल्यांची चाचणी घ्या आणि रणांगण जिंका!",
+                countdown: "नोंदणीची अंतिम मुदत उलटी गणना",
+                rules: "नियम आणि मार्गदर्शक तत्त्वे",
+                rulesList: [
+                    "कोणतेही हॅकिंग, टीमिंग किंवा अपमानास्पद भाषा नाही.",
+                    "खेळाडूंनी स्वतःचे खाते वापरावे.",
+                    "नोंदणी फी सहभागापूर्वी भरावी.",
+                    "स्पर्धा संपल्यानंतर 24 तासांत बक्षीस वितरण केले जाईल.",
+                    "सामन्यांदरम्यान आयोजकांच्या सूचनांचे पालन करा."
+                ],
+                prizes: "बक्षीस पूल",
+                prizesText: "1. प्रत्येक किलसाठी तुम्हाला २० रुपये मिळतील.<br>2. शेवटपर्यंत टिकणारा खेळाडू ५०० रुपये जिंकेल.<br>3. हरलेल्या खेळाडूकडे X किल्स असतील, तर बक्षीस २०*X रुपये दिले जाईल.<br>4. जिंकणाऱ्या खेळाडूने X किल्स केले असतील, तर त्याला ५०० + २०*X रुपये मिळतील.",
+                register: "नोंदणी करा"
+            }
+        };
+
+        function toggleLanguage() {
+            currentLanguage = currentLanguage === "en" ? "mr" : "en";
+            document.getElementById("prizes-label").innerHTML = translations[currentLanguage].prizes;
+            document.getElementById("prizes-text").innerHTML = translations[currentLanguage].prizesText;
+        }
+    </script>
+</body>
+</html>
